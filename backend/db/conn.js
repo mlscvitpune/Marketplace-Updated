@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import 'dotenv/config';
+import mongoose from "mongoose";
+import "dotenv/config";
 
 const mongoURI = process.env.DB_URL;
 
@@ -9,9 +9,9 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('CONNECTED TO DB');
+    console.log("CONNECTED TO DB");
   })
   .catch((err) => {
-    //console.log('CONNECTION TO DB FAILED!');
-    //console.log(err);
+    console.log("CONNECTION TO DB FAILED!");
+    console.log(err);
   });

@@ -1,39 +1,41 @@
-import expressAsyncHandler from 'express-async-handler';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import User from "../models/user.model.js";
+import jwt from "jsonwebtoken";
 
-// export const login = expressAsyncHandler(async (req, res) => {
-//   const { email, password } = req.body;
+const login = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    if (user) {
+      const token=jwt.sign({id:user._id,name:user.name,email:user.email},process.env.ACCESS_TOKEN_SECRET,{expiresIn:'10d'});
+      res.status(200).json({token});
+    } else {
+      res.status(404).json({ error: "User not found!" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-//   const user = await User.findOne({ email }).populate("tasks");
-//   if (!user) {
-//     return res.send({
-//       error: true,
-//       message: "User with this email does not exist!",
-//     });
-//   }
+const signup = async (req, res) => {
+  try {
+    const user = await User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    res.status(201).json({ user });
+  } catch (error) {
+    if (error.code === 11000) {
+      console.log("email already exists");
+      res.status(402).json({ error: "Email already exists!" });
+    }
+    console.log("error");
+    res.status(400).json({ error: error.message });
+  }
+};
 
-//   const isAuth = await bcrypt.compare(password, user.password);
-//   if (!isAuth) {
-//     return res.send({ error: true, message: "Incorrect credentials!" });
-//   }
 
-//   if (!user.isActive) {
-//     return res.send({ error: true, message: "Your account is disabled!" });
-//   }
-
-//   const token = jwt.sign(
-//     {
-//       _id: user._id,
-//     },
-//     process.env.JWT_SECRET,
-//     { expiresIn: "100000m" }
-//   );
-
-//   return res.send({
-//     ok: true,
-//     message: "User successfully logged in!",
-//     user,
-//     token,
-//   });
-// });
+export { login, signup };

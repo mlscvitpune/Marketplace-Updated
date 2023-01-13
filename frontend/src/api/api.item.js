@@ -37,7 +37,7 @@ const displayItem = async (url, userprofile, username="") => {
 
 const deleteItem = async (url, id) => {
     const response = await fetch(url, {
-        method: "POST",
+        method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
             },

@@ -17,7 +17,6 @@ import {
 } from "@chakra-ui/react";
 import img1 from "../components/Images/nodeMCU.jpeg";
 import img2 from "../components/Images/arduinoUNO.jpeg";
-import axios from "axios";
 import { displayCart, deleteCartItem } from "../api/api.cart";
 
 const Cart = () => {
