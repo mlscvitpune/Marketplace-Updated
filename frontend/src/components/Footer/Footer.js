@@ -1,9 +1,8 @@
 import React from "react";
 import "./Footer.css";
-import logo from "../../assets/images/eco-logo.png";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation } from "react-router-dom";
 import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
   const year = new Date().getFullYear();

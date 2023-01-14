@@ -35,7 +35,7 @@ const Cart = () => {
   }, []);
 
   const delete_item = async (username, id) => {
-    const res = await deleteCartItem(url='/cart/delete', id=id, username=username)  
+    const res = await deleteCartItem('/cart/delete', id, username)  
     window.alert(res.data.message);
     window.location.reload();
   };
@@ -93,7 +93,7 @@ const Cart = () => {
                               </Select>
                               <DeleteIcon
                                 onClick={() => {
-                                  delete_item(item.username, item._id);
+                                  delete_item(localStorage.getItem("user"), item._id);
                                 }}
                                 color={"red"}
                               />

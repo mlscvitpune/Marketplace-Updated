@@ -38,7 +38,7 @@ const Items = (props) => {
 
     const addToCart = async (id, username) => {
         console.log(username);
-        const { data } = await createCartItem(BASE_URL + "/cart/add", id, username);
+        const { data } = await createCartItem("/cart/add", id, username);
         window.alert(data.message);
     };
 

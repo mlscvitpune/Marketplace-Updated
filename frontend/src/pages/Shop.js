@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import Dash from "../components/DashStart/Dash";
-import { display } from "../apiCalls";
 import Items from "../components/Shop/Items";
 
 

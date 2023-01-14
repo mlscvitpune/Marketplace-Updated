@@ -3,14 +3,14 @@ import Item from "../models/item.model.js";
 
 const addToCart = async (req, res) => {
   try {
-    const id = req.body.id;
-    const username = req.body.username;
+    const id = req.body.data.id;
+    const username = req.body.data.username;
     console.log(id, username);
     const user = await User.findOne({ name: username });
 
     if (!user) {
       return res.status(404).json({
-        message: "Failed to delete item from the cart, Please try again!",
+        message: "Failed to add item from the cart, Please try again!",
       });
     }
 
@@ -29,7 +29,6 @@ const addToCart = async (req, res) => {
 
 const getCart = async (req, res) => {
   try {
-    // console.log(req.body);
     const username = req.params.username;
     const user = await User.findOne({ name: username });
     console.log(user);
@@ -47,10 +46,11 @@ const getCart = async (req, res) => {
 
 const removeFromCart = async (req, res) => {
     try {
+    // console.log(req.body);
     const id = req.body.id;
     const username = req.body.username;
-
-    const user = await User.findOne({ username: username });
+    // console.log(id, username);
+    const user = await User.findOne({ name: username });
 
     if (!user) {
       res
@@ -59,12 +59,12 @@ const removeFromCart = async (req, res) => {
           message: "Failed to delete item from the cart, Please try again!",
         });
     }
-
+    console.log("user = " + user);
     const index = user.cart.indexOf(id);
     if (index > -1) {
       user.cart.splice(index, 1);
     }
-
+    console.log(user.cart);
     await user.save();
     res.status(200).json({ message: "Item deleted from cart" });
   } catch (error) {
