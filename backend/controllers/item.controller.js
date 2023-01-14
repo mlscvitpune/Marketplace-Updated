@@ -1,8 +1,9 @@
 import Item from "../models/item.model.js";
 
 const createItem = async (req, res) => {
+  // console.log(req.body);
   try {
-    const item = await Item.create({
+    const item = new Item({
       username: req.body.username,
       title: req.body.title,
       category: req.body.category,
@@ -11,13 +12,19 @@ const createItem = async (req, res) => {
       description: req.body.description,
       images: req.body.images,
     });
-    res.status(201).json({ item });
+    const check = await item.save();
+    console.log(check);
+    if(check)
+      return res.status(201).json({ item });
+    else
+      return res.status(400).json({ error: "Error adding item" });
   } catch (error) {
     if (error.code === 11000) {
       console.log("item already exists");
-      res.status(402).json({ error: "Item already exists!" });
+      return res.status(402).json({ error: "Item already exists!" });
     } else {
-      res.status(400).json({ error: error.message });
+      console.log(error.message);
+      return res.status(400).json({ error: error.message });
     }
   }
 };

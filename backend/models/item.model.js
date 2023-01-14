@@ -14,7 +14,7 @@ const Item = new mongoose.Schema(
         },
         category: {
             type: String,
-            required: [true, "Please provide a category"],
+            required: [false, "Please provide a category"],
             unique: false,
         }, 
         price: {

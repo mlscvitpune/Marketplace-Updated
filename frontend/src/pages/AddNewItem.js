@@ -28,6 +28,23 @@ function AddNewItem() {
   const UserName = localStorage.getItem("user");
 
   function handleSubmit() {
+    if (TITLE === "") {
+      window.alert("Please enter title");
+      return;
+    }
+    if (SP === "") {
+      window.alert("Please enter selling price");
+      return;
+    }
+    if (Quantity === "") {
+      window.alert("Please enter quantity");
+      return;
+    }
+    if (Description === "") {
+      window.alert("Please enter description");
+      return;
+    }
+
     const data = {
       username: UserName,
       title: TITLE,
@@ -36,8 +53,9 @@ function AddNewItem() {
       quantity: Quantity,
       description: Description,
     };
-    console.log(data);
+    // console.log(data);
     const res = createItem(BASE_URL + "/item/create", data);
+    console.log(res);
     if (!res.error) {
       window.alert("Item added successfully");
     } else if (res.error === 11000) {
