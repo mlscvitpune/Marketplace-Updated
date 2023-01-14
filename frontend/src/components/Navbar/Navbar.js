@@ -41,7 +41,6 @@ const Navbar = () => {
                   <>
                     <Button colorScheme='teal' onClick={() => { navigate('/shop') }}>Shop</Button>
                     <IconButton as={FaShoppingCart} onClick={() => { navigate('/cart') }}></IconButton>
-                    <Button colorScheme='teal' onClick={() => { navigate('/login') }}>Logout</Button>
                     <Button colorScheme='teal' onClick={() => { navigate('/newItem') }}>Add Item</Button>
                     <Button colorScheme='teal' onClick={() => { 
                       window.localStorage.removeItem("token") 
