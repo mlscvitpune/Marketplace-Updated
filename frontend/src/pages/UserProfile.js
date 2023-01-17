@@ -109,7 +109,7 @@ const UserProfile = () => {
         <Form />
       </Stack>
       
-      <Items userprofile={true} username={localStorage.getItem('user')} />
+      <Items userprofile={true} />
     </>
   )
 }
