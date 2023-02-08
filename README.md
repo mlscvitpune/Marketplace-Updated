@@ -11,7 +11,8 @@ The site can be primarily divided into 4 parts: Explore , recent activity, Addin
 
 ### The explore page
 The Explore area will display all the random posts and there will be a search mechanism so that the user can look for their desired item.
-###Structure of a post:
+
+### Structure of a post:
 1. Images
 2. Title
 3. Description (which will contain info about the condition of the item)
