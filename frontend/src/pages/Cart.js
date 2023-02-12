@@ -18,13 +18,15 @@ import {
 import img1 from "../components/Images/nodeMCU.jpeg";
 import img2 from "../components/Images/arduinoUNO.jpeg";
 import { displayCart, deleteCartItem } from "../api/api.cart";
+import getAuthenticatedUser from "../hooks/isAuth.middleware";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   let netPrice = 0;
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await displayCart(`/cart/read/${localStorage.getItem("user")}`);
+      const user = await getAuthenticatedUser();
+      const { data } = await displayCart(`/cart/read/${user.name}`);
       if (data.error) {
         window.alert(data.error);
       }
@@ -34,8 +36,9 @@ const Cart = () => {
     fetchData();
   }, []);
 
-  const delete_item = async (username, id) => {
-    const res = await deleteCartItem('/cart/delete', id, username)  
+  const delete_item = async (id) => {
+    const user = await getAuthenticatedUser();
+    const res = await deleteCartItem('/cart/delete', id, user.name)  
     window.alert(res.data.message);
     window.location.reload();
   };
@@ -93,7 +96,7 @@ const Cart = () => {
                               </Select>
                               <DeleteIcon
                                 onClick={() => {
-                                  delete_item(localStorage.getItem("user"), item._id);
+                                  delete_item(item._id);
                                 }}
                                 color={"red"}
                               />

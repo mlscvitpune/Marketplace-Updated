@@ -12,6 +12,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { BASE_URL } from "../constants/appConstants";
+import getAuthenticatedUser from "../hooks/isAuth.middleware";
 
 function AddNewItem() {
   const [TITLE, setTITLE] = useState("");
@@ -25,9 +26,9 @@ function AddNewItem() {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
-  const UserName = localStorage.getItem("user");
+  // const UserName = localStorage.getItem("user");
 
-  function handleSubmit() {
+  const handleSubmit = async () => {
     if (TITLE === "") {
       window.alert("Please enter title");
       return;
@@ -45,8 +46,10 @@ function AddNewItem() {
       return;
     }
 
+    const user = await getAuthenticatedUser();
+
     const data = {
-      username: UserName,
+      username: user.name,
       title: TITLE,
       category: Category,
       price: SP,
@@ -54,8 +57,8 @@ function AddNewItem() {
       description: Description,
     };
     // console.log(data);
-    const res = createItem(BASE_URL + "/item/create", data);
-    console.log(res);
+    const res = await createItem(BASE_URL + "/item/create", data);
+    // console.log(res);
     if (!res.error) {
       window.alert("Item added successfully");
     } else if (res.error === 11000) {
@@ -63,6 +66,7 @@ function AddNewItem() {
     } else {
       window.alert("Error adding item");
     }
+
   }
   return (
     <>
