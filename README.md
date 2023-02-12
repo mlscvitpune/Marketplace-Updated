@@ -1,4 +1,9 @@
 # VIT Marketplace
+
+## How to run the website locally:
+1. for frontend - npm run start
+2. for backend - npm run nodemon
+
 The main goal of this website is to provide a platform to connect the students of our college, who want to either buy or sell their belongings.
 
 ## Objective: The main goal of this website would be to provide a platform to connect the students of our college who want to either buy or sell their belongings.
