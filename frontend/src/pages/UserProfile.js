@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import Form from '../components/Form/Form'
-import img from '../components/Images/Profile.jpeg'
+import React, { useState } from "react";
+import Form from "../components/Form/Form";
+import img from "../components/Images/Profile.jpeg";
 import { SocialIcon } from "react-social-icons";
 import {
   Image,
@@ -15,11 +15,10 @@ import {
   Heading,
   IconButton,
   useMediaQuery,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 
-import { StarIcon, EditIcon } from '@chakra-ui/icons'
-import Items from '../components/Shop/Items'
-
+import { StarIcon, EditIcon } from "@chakra-ui/icons";
+import Items from "../components/Shop/Items";
 
 const UserProfile = () => {
   const [file, setFile] = useState(img);
@@ -33,15 +32,15 @@ const UserProfile = () => {
     rating: 4,
   };
 
-  const [isSmallViewport ] = useMediaQuery("(max-width:600px)")
+  const [isSmallViewport] = useMediaQuery("(max-width:600px)");
 
   return (
     <>
-      <Stack spacing={"44"} direction={isSmallViewport  ? "column" : "row"}>  
-        <Box p={5} >
+      <Stack spacing={"44"} direction={isSmallViewport ? "column" : "row"}>
+        <Box p={5}>
           <Center>
             <Card p={4} size={"lg"}>
-              <Box alignSelf={'center'}>
+              <Box alignSelf={"center"}>
                 <Heading size={"md"}>Profile</Heading>
               </Box>
               <CardBody>
@@ -55,10 +54,7 @@ const UserProfile = () => {
                     src={file}
                     alt="User"
                   />
-                  <Button
-                    colorScheme="teal"
-                    variant="solid"
-                  >
+                  <Button colorScheme="teal" variant="solid">
                     Upload Photo
                     <input
                       type="file"
@@ -108,10 +104,10 @@ const UserProfile = () => {
         </Box>
         <Form />
       </Stack>
-      
+
       <Items userprofile={true} />
     </>
-  )
-}
+  );
+};
 
-export default UserProfile
+export default UserProfile;
